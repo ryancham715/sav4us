@@ -4,17 +4,19 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/AppNavigator";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
+import { usernameToEmail } from "../utils/username";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 export default function LoginScreen({ navigation }: Props) {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [pw, setPw] = useState("");
 
     const login = async () => {
         try {
-            await signInWithEmailAndPassword(auth, email.trim(), pw);
-            navigation.replace("Success"); // 登录成功 -> 成功页（占位）
+            const internalEmail = usernameToEmail(username);
+            await signInWithEmailAndPassword(auth, internalEmail, pw);
+            navigation.replace("Success");
         } catch (e: any) {
             Alert.alert("Login failed", e?.message ?? "Unknown error");
         }
@@ -24,12 +26,12 @@ export default function LoginScreen({ navigation }: Props) {
         <View style={{ padding: 24, gap: 12 }}>
             <Text style={{ fontSize: 22, fontWeight: "600" }}>Login</Text>
 
-            <Text>Email</Text>
+            <Text>Username</Text>
             <TextInput
-                value={email}
-                onChangeText={setEmail}
+                value={username}
+                onChangeText={setUsername}
                 autoCapitalize="none"
-                keyboardType="email-address"
+                autoCorrect={false}
                 style={{ borderWidth: 1, padding: 10, borderRadius: 8 }}
             />
 

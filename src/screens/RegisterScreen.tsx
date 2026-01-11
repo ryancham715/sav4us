@@ -4,26 +4,28 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigation/AppNavigator";
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth, db } from "../services/firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { usernameToEmail, normalizeUsername } from "../utils/username";
+import { doc, setDoc, serverTimestamp, getDoc } from "firebase/firestore";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Register">;
 
 export default function RegisterScreen({ navigation }: Props) {
-    const [email, setEmail] = useState("");
-    const [displayName, setDisplayName] = useState("");
+    const [username, setUsername] = useState("");
     const [pw, setPw] = useState("");
 
     const register = async () => {
         try {
-            const cred = await createUserWithEmailAndPassword(auth, email.trim(), pw);
+            const uname = normalizeUsername(username);
+            const internalEmail = usernameToEmail(uname);
 
+            const cred = await createUserWithEmailAndPassword(auth, internalEmail, pw);
             const u = cred.user;
+
             await setDoc(
                 doc(db, "users", u.uid),
                 {
                     uid: u.uid,
-                    email: u.email ?? email.trim(),
-                    displayName: displayName.trim() || (u.email ?? email).split("@")[0],
+                    username: uname,
                     createdAt: serverTimestamp(),
                 },
                 { merge: true }
@@ -38,28 +40,21 @@ export default function RegisterScreen({ navigation }: Props) {
         }
     };
 
+
     return (
         <View style={{ padding: 24, gap: 12 }}>
             <Text style={{ fontSize: 22, fontWeight: "600" }}>Register</Text>
 
-            <Text>Email *</Text>
+            <Text>Username</Text>
             <TextInput
-                value={email}
-                onChangeText={setEmail}
+                value={username}
+                onChangeText={setUsername}
                 autoCapitalize="none"
-                keyboardType="email-address"
+                autoCorrect={false}
                 style={{ borderWidth: 1, padding: 10, borderRadius: 8 }}
             />
 
-            <Text>Display Name</Text>
-            <TextInput
-                value={displayName}
-                onChangeText={setDisplayName}
-                autoCapitalize="words"
-                style={{ borderWidth: 1, padding: 10, borderRadius: 8 }}
-            />
-
-            <Text>Password *</Text>
+            <Text>Password</Text>
             <TextInput
                 value={pw}
                 onChangeText={setPw}
