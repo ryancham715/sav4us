@@ -16,7 +16,7 @@ export default function LoginScreen({ navigation }: Props) {
         try {
             const internalEmail = usernameToEmail(username);
             await signInWithEmailAndPassword(auth, internalEmail, pw);
-            navigation.replace("Success");
+            navigation.replace("Projects"); // 登录成功 -> 項目列表頁
         } catch (e: any) {
             Alert.alert("Login failed", e?.message ?? "Unknown error");
         }
