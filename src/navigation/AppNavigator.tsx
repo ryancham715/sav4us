@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
-import SuccessScreen from "../screens/SuccessScreen";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -26,11 +25,6 @@ export default function AppNavigator() {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Success"
-          component={SuccessScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

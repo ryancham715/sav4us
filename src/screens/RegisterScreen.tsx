@@ -27,6 +27,8 @@ export default function RegisterScreen({ navigation }: Props) {
           uid: u.uid,
           username: uname,
           createdAt: serverTimestamp(),
+          pairedWithUid: null,
+          pairedAt: null,
         },
         { merge: true }
       );

@@ -50,7 +50,6 @@ export default function LoginScreen({ navigation }: Props) {
       setLoading(true);
       const internalEmail = usernameToEmail(username.trim());
       await signInWithEmailAndPassword(auth, internalEmail, pw);
-      navigation.replace("Success");
     } catch (e: any) {
       Alert.alert("Login failed", e?.message ?? "Unknown error");
     } finally {
