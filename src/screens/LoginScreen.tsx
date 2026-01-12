@@ -67,7 +67,7 @@ export default function LoginScreen({ navigation }: Props) {
           <View style={styles.container}>
             {/* 顶部插画：保留大视觉 */}
             <Image
-              source={require("../../assets/auth-illustration.png")}
+              source={require("../../assets/adaptive-icon.png")}
               style={[styles.hero, { height: screenHeight * 0.42 }]}
               resizeMode="contain"
             />

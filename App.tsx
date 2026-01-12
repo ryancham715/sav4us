@@ -84,12 +84,19 @@ export default function App() {
   return (
     <NavigationContainer>
       {!fbUser ? (
-        <AuthStack.Navigator initialRouteName="Login">
+        <AuthStack.Navigator
+          initialRouteName="Login"
+          screenOptions={{ headerShown: false }}
+        >
           <AuthStack.Screen name="Login" component={LoginScreen} />
           <AuthStack.Screen name="Register" component={RegisterScreen} />
         </AuthStack.Navigator>
       ) : (
-        <MainStack.Navigator initialRouteName={initialMainRoute} key={initialMainRoute}>
+        <MainStack.Navigator
+          initialRouteName={initialMainRoute}
+          key={initialMainRoute}
+          screenOptions={{ headerShown: false }}
+        >
           <MainStack.Screen name="Pairing" component={PairingScreen} />
           <MainStack.Screen name="Dashboard" component={DashboardScreen} />
         </MainStack.Navigator>
