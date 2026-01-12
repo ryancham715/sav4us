@@ -8,16 +8,16 @@ import { RootStackParamList } from "../navigation/AppNavigator";
 type Props = NativeStackScreenProps<RootStackParamList, "Success">;
 
 export default function SuccessScreen({ navigation }: Props) {
-    const logout = async () => {
-        await signOut(auth);
-        navigation.replace("Login");
-    };
+  const logout = async () => {
+    await signOut(auth);
+    navigation.replace("Login");
+  };
 
-    return (
-        <View style={{ padding: 24, gap: 12 }}>
-            <Text style={{ fontSize: 22, fontWeight: "600" }}>Success (Placeholder)</Text>
-            <Text>You are logged in.</Text>
-            <Button title="Logout" onPress={logout} />
-        </View>
-    );
+  return (
+    <View style={{ padding: 24, gap: 12 }}>
+      <Text style={{ fontSize: 22, fontWeight: "600" }}>Success (Placeholder)</Text>
+      <Text>You are logged in.</Text>
+      <Button title="Logout" onPress={logout} />
+    </View>
+  );
 }

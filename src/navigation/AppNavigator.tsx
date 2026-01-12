@@ -6,9 +6,9 @@ import RegisterScreen from "../screens/RegisterScreen";
 import SuccessScreen from "../screens/SuccessScreen";
 
 export type RootStackParamList = {
-    Login: undefined;
-    Register: undefined;
-    Success: undefined;
+  Login: undefined;
+  Register: undefined;
+  Success: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
