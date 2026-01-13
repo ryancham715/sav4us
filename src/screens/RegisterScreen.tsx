@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../navigation/AppNavigator";
+import { AuthStackParamList } from "../types/navigation";
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth, db } from "../services/firebase";
 import { usernameToEmail, normalizeUsername } from "../utils/username";
-import { doc, setDoc, serverTimestamp, getDoc } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Register">;
+type Props = NativeStackScreenProps<AuthStackParamList, "Register">;
 
 export default function RegisterScreen({ navigation }: Props) {
   const [username, setUsername] = useState("");

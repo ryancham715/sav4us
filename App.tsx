@@ -10,16 +10,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import PairingScreen from "./src/screens/PairingScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
-
-type AuthStackParamList = {
-  Login: undefined;
-  Register: undefined;
-};
-
-type MainStackParamList = {
-  Pairing: undefined;
-  Dashboard: undefined;
-};
+import { AuthStackParamList, MainStackParamList } from "./src/types/navigation";
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 const MainStack = createNativeStackNavigator<MainStackParamList>();
